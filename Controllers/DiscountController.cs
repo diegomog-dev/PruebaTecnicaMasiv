@@ -15,27 +15,51 @@ namespace PruebaTecnicaMasiv.Controllers
             _discountService = discountService;
         }
         [HttpGet]
-        public ActionResult<List<Discount>> Get()
+        public async Task<ActionResult> GetAllDiscount()
         {
-            return _discountService.Get();
+            return Ok(await _discountService.GetAllDiscount());
         }
-        [HttpPost]
-        public ActionResult<Discount> Create(Discount discount)
+        [HttpGet("GetDiscountDetail{id}")]
+        public async Task<ActionResult> GetDiscountDetail(string id)
         {
-            _discountService.Create(discount);
-            return Ok(discount);
+            return Ok(await _discountService.GetDiscountById(id));
         }
-        [HttpPut]
-        public ActionResult Update(Discount discount)
+        [HttpPost("Create")]
+        public async Task<ActionResult> CreateDiscount([FromBody] Discount discount)
         {
-            _discountService.Update(discount.Id, discount);
+            if (discount == null)
+                return BadRequest();
+            if (discount.Console == string.Empty)
+            {
+                ModelState.AddModelError("Consele", "The discount shouldn't be empty");
+            }
+            await _discountService.CreateDiscount(discount);
+            return Created("Created", true);
+        }
+        [HttpPut("UpdateDiscount{id}")]
+        public async Task<ActionResult> UpdateDiscount([FromBody]Discount discount, string id)
+        {
+            if (discount == null)
+                return BadRequest();
+            if (discount.Console == string.Empty)
+            {
+                ModelState.AddModelError("Consele", "The discount shouldn't be empty");
+            }
+            discount.Id = id;
+            await _discountService.UpdateDiscount(discount.Id, discount);
             return Ok();
         }
-        [HttpDelete("{id}")]
-        public ActionResult Delete(string id)
+        [HttpDelete("DeleteDiscount{id}")]
+        public async Task<ActionResult> DeleteDiscount(string id)
         {
-            _discountService.Delete(id);
-            return Ok();
+            await _discountService.DeleteDiscount(id);
+            return NoContent();
+        }
+        [HttpPost("ImportData{path}")]
+        public ActionResult ImportData(string path)
+        {
+            _discountService.ImportDataExcel(path);
+            return Created("Created", true);
         }
     }
 }
