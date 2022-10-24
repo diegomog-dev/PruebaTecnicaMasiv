@@ -22,6 +22,10 @@ namespace PruebaTecnicaMasiv.Services
         {
             return await _discount.FindAsync(d => d.Id == id).Result.ToListAsync();
         }
+        public async Task<Discount> GetDiscountByName(string console)
+        {
+            return await _discount.FindAsync(d => d.Console == console).Result.FirstOrDefaultAsync();
+        }
         public async Task CreateDiscount(Discount discount)
         {
             await _discount.InsertOneAsync(discount);
