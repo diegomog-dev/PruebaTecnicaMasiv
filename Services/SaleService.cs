@@ -1,6 +1,9 @@
-﻿using MongoDB.Driver;
+﻿using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
 using PruebaTecnicaMasiv.Models;
 using PruebaTecnicaMasiv.Services;
+using MongoDB.Driver.Linq;
+using System.Text.Json.Nodes;
 
 namespace PruebaTecnicaMasiv.Services
 {
@@ -40,5 +43,13 @@ namespace PruebaTecnicaMasiv.Services
             await _sales.DeleteOneAsync(d => d.Id == id);
         }
         public Discount? FindDiscount(string nameConsole) =>_discount.Find(s => s.Console == nameConsole).FirstOrDefault();
+        public int TotalDiscount()
+        {
+            var totalDiscount = _sales.AsQueryable<Sales>();
+            var res = (from s in totalDiscount
+                      select s).ToList();
+            var resulTotal = res.Sum(z => z.DiscountValue);
+            return resulTotal;
+        }
     }
 }

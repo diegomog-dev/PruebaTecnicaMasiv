@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using PruebaTecnicaMasiv.Models;
 using PruebaTecnicaMasiv.Services;
+using System.Text.Json.Nodes;
 
 namespace PruebaTecnicaMasiv.Controllers
 {
@@ -25,6 +27,12 @@ namespace PruebaTecnicaMasiv.Controllers
         {
             return Ok(await _saleService.GetSaleById(id));
         }
+        [HttpGet]
+        public ActionResult TotalDiscount()
+        {
+            return Ok(new { TotalDescuentos = _saleService.TotalDiscount()});
+        }
+
         [HttpPost]
         public async Task<ActionResult> CreateSale([FromBody] SalesView salesView)
         {
@@ -50,7 +58,7 @@ namespace PruebaTecnicaMasiv.Controllers
             sale.Price = salesView.PriceConsole;
             sale.Total = salesView.PriceConsole - sale.DiscountValue;
             await _saleService.CreateSale(sale);
-            return CreatedAtAction(nameof(GetSaleDetail), new { id = sale.Id }, sale.Total.ToJson());
+            return CreatedAtAction(nameof(GetSaleDetail), new { id = sale.Id }, new { ValorCobrarCliente = sale.Total });
         }
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateSale([FromBody] Sales sale, string id)
