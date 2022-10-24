@@ -14,6 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.Configure<DbSettings>(builder.Configuration.GetSection(nameof(DbSettings)));
 builder.Services.AddSingleton<IDbSettings>(d=>d.GetRequiredService<IOptions<DbSettings>>().Value);
 builder.Services.AddSingleton<DiscountService>();
+builder.Services.AddSingleton<SaleService>();
 
 var app = builder.Build();
 

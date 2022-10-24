@@ -24,6 +24,11 @@ namespace PruebaTecnicaMasiv.Controllers
         {
             return Ok(await _discountService.GetDiscountById(id));
         }
+        [HttpGet("GetDiscountByName{nameConsole}")]
+        public async Task<ActionResult> GetDiscountByName(string nameConsole)
+        {
+            return Ok(await _discountService.GetDiscountByName(nameConsole));
+        }
         [HttpPost("Create")]
         public async Task<ActionResult> CreateDiscount([FromBody] Discount discount)
         {
