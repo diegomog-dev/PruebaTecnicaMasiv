@@ -42,7 +42,10 @@ namespace PruebaTecnicaMasiv.Services
         {
             await _sales.DeleteOneAsync(d => d.Id == id);
         }
-        public Discount? FindDiscount(string nameConsole) =>_discount.Find(s => s.Console == nameConsole).FirstOrDefault();
+        public Discount? FindDiscount(string nameConsole)
+        {
+            return _discount.Find(s => s.Console == nameConsole).FirstOrDefault();
+        }        
         public int TotalDiscount()
         {
             var totalDiscount = _sales.AsQueryable<Sales>();

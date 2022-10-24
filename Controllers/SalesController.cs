@@ -1,4 +1,6 @@
 ﻿using DocumentFormat.OpenXml.Wordprocessing;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
@@ -18,22 +20,26 @@ namespace PruebaTecnicaMasiv.Controllers
             _saleService = saleService;
         }
         [HttpGet]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator, User")]
         public async Task<ActionResult> GetAllSales()
         {
             return Ok(await _saleService.GetAllSales());
         }
         [HttpGet("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator, User")]
         public async Task<ActionResult> GetSaleDetail(string id)
         {
             return Ok(await _saleService.GetSaleById(id));
         }
         [HttpGet]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator, User")]
         public ActionResult TotalDiscount()
         {
             return Ok(new { TotalDescuentos = _saleService.TotalDiscount()});
         }
 
         [HttpPost]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator, User")]
         public async Task<ActionResult> CreateSale([FromBody] SalesView salesView)
         {
             Sales sale = new Sales();
@@ -61,6 +67,7 @@ namespace PruebaTecnicaMasiv.Controllers
             return CreatedAtAction(nameof(GetSaleDetail), new { id = sale.Id }, new { ValorCobrarCliente = sale.Total });
         }
         [HttpPut("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
         public async Task<ActionResult> UpdateSale([FromBody] Sales sale, string id)
         {
             if (sale == null)
@@ -74,6 +81,7 @@ namespace PruebaTecnicaMasiv.Controllers
             return Ok();
         }
         [HttpDelete("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
         public async Task<ActionResult> DeleteSale(string id)
         {
             await _saleService.DeleteSale(id);
