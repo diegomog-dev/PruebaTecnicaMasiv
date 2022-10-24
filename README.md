@@ -1,11 +1,12 @@
-# PruebaTecnicaMasiv
+Ôªø# PruebaTecnicaMasiv
 
-_Prueba tÈcnica para la copaÒia Masiv para el cargo de desarrollador Junior, realizada en lenguaje C# .Net6._
-_Api Api donde es posible aÒadir por medio de un archivo en Excel los datos a la base de datos en MongoDB._
-_GeneraciÛn de ventas y validaciÛn de descuentos que se le puede aplicar al cliente de acuerdo al precio de cada producto._
-_GeneraciÛn del total de descuentos aplicados al total de ventas hechas a los clientes._
-_AutenticaciÛn de usuarios por medio de JWT Token para que pueda ser posible la visualizaciÛn y consumo de cada Endpoint._
+_Prueba t√©cnica para la copa√±ia Masiv para el cargo de desarrollador Junior, realizada en lenguaje C# .Net6._
+_Api Api donde es posible a√±adir por medio de un archivo en Excel los datos a la base de datos en MongoDB._
+_Generaci√≥n de ventas y validaci√≥n de descuentos que se le puede aplicar al cliente de acuerdo al precio de cada producto._
+_Generaci√≥n del total de descuentos aplicados al total de ventas hechas a los clientes._
+_Autenticaci√≥n de usuarios por medio de JWT Token para que pueda ser posible la visualizaci√≥n y consumo de cada Endpoint._
 _Para ingresar o autenticarse se colocaron dos usuarios de ejemplo para poder validar el funcionamiento de la API_
+
 _userName: Admin_
 _password: Admin_
 
@@ -13,19 +14,19 @@ _userName: User_
 _password: user_
 
 ## Importar Datos a la Base de Datos
-_Utilizar el endpoint ImportData y en el parametro que solicita se debe agregar la ubicaciÛn del archivo en el PC_
+_Utilizar el endpoint ImportData y en el parametro que solicita se debe agregar la ubicaci√≥n del archivo en el PC_
 
 ## Crear una venta
-_Solo ingresar al endpoint CreateSale y colocar la informaciÛn solicitada en mayuscula, de acuerdo a lo que se encuentra en el documento de referencia_
+_Solo ingresar al endpoint CreateSale y colocar la informaci√≥n solicitada en mayuscula, de acuerdo a lo que se encuentra en el documento de referencia_
 
 ## Validar el total de descuentos otorgados
 _Se debe ingresar al endpoint TotalDiscount_
 
-## Construido con ???
+## Construido con üõ†Ô∏è
 * [C# .Net 6]
 * [JWT Token]
 * [SpreadSheetLight]
 
-## Autor ??
+## Autor ‚úíÔ∏è
 
-* **Diego Armando MogollÛn** - *Trabajo Inicial* - [diegomog-dev](https://github.com/diegomog-dev)
+* **Diego Armando Mogoll√≥n** - *Trabajo Inicial* - [diegomog-dev](https://github.com/diegomog-dev)
